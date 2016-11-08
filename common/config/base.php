@@ -1,6 +1,6 @@
 <?php
 $config = [
-    'name'=>'Yii2 Starter Kit',
+    'name'=>'指彩网络科技有限公司',
     'vendorPath'=>dirname(dirname(__DIR__)).'/vendor',
     'extensions' => require(__DIR__ . '/../../vendor/yiisoft/extensions.php'),
     'sourceLanguage'=>'en-US',

@@ -21,10 +21,13 @@ $this->beginContent('@frontend/views/layouts/_clear.php')
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => Yii::t('frontend', 'Home'), 'url' => ['/site/index']],
-            ['label' => Yii::t('frontend', 'About'), 'url' => ['/page/view', 'slug'=>'about']],
-            ['label' => Yii::t('frontend', 'Articles'), 'url' => ['/article/index']],
+            ['label' => '微信商城', 'url' => ['/page/view', 'slug'=>'shop']],
+            ['label' => '服务', 'url' => ['/page/view', 'slug'=>'service']],
+            ['label' => '产品', 'url' => ['/page/view', 'slug'=>'product']],
+            //['label' => Yii::t('frontend', 'About'), 'url' => ['/page/view', 'slug'=>'about']],
+            //['label' => Yii::t('frontend', 'Articles'), 'url' => ['/article/index']],
             ['label' => Yii::t('frontend', 'Contact'), 'url' => ['/site/contact']],
-            ['label' => Yii::t('frontend', 'Signup'), 'url' => ['/user/sign-in/signup'], 'visible'=>Yii::$app->user->isGuest],
+            /*['label' => Yii::t('frontend', 'Signup'), 'url' => ['/user/sign-in/signup'], 'visible'=>Yii::$app->user->isGuest],
             ['label' => Yii::t('frontend', 'Login'), 'url' => ['/user/sign-in/login'], 'visible'=>Yii::$app->user->isGuest],
             [
                 'label' => Yii::$app->user->isGuest ? '' : Yii::$app->user->identity->getPublicIdentity(),
@@ -55,7 +58,7 @@ $this->beginContent('@frontend/views/layouts/_clear.php')
                         'active' => Yii::$app->language === $code
                     ];
                 }, array_keys(Yii::$app->params['availableLocales']))
-            ]
+            ]*/
         ]
     ]); ?>
     <?php NavBar::end(); ?>
@@ -66,8 +69,7 @@ $this->beginContent('@frontend/views/layouts/_clear.php')
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?php echo date('Y') ?></p>
-        <p class="pull-right"><?php echo Yii::powered() ?></p>
+        <p style="text-align: center">&copy; <?php echo date('Y') ?> 版权所有：指彩科技 备案号：沪ICP备15029764号 </p>
     </div>
 </footer>
 <?php $this->endContent() ?>
