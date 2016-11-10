@@ -76,7 +76,7 @@ class Wechat extends ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%wechat}}';
+        return '{{%we_wechat}}';
     }
 
     /**
