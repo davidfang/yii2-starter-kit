@@ -37,7 +37,10 @@ $config = [
         'i18n' => [
             'class' => 'backend\modules\i18n\Module',
             'defaultRoute'=>'i18n-message/index'
-        ]
+        ],
+        'wechat' => [
+            'class' => 'zc\wechat\admin\Module',
+        ],
     ],
     'as globalAccess'=>[
         'class'=>'\common\behaviors\GlobalAccessBehavior',
@@ -86,14 +89,33 @@ if (YII_ENV_DEV) {
     $config['modules']['gii'] = [
         'class'=>'yii\gii\Module',
         'generators' => [
-            'crud' => [
+            /*'crud' => [
                 'class'=>'yii\gii\generators\crud\Generator',
                 'templates'=>[
-                    'yii2-starter-kit' => Yii::getAlias('@backend/views/_gii/templates')
+                    'yii2-starter-kit' => Yii::getAlias('@backend/views/_gii/templates'),
+                    'my-gii' => Yii::getAlias('@backend/views/_my_gii/crud')
                 ],
                 'template' => 'yii2-starter-kit',
                 'messageCategory' => 'backend'
-            ]
+            ],*/
+            'crud' => [
+                //'class' => 'yii\gii\generators\crud\Generator',
+                'class' => 'zc\gii\crud\Generator',
+                'templates' => [
+                    'yii2-starter-kit' => Yii::getAlias('@backend/views/_gii/templates'),
+                    'zc-gii' => '@vendor/zc/gii/crud/default',
+                ],
+                'template' => 'yii2-starter-kit',
+                'messageCategory' => 'backend'
+            ],
+            'model' => [
+                'class' => 'zc\gii\model\Generator',
+                'templates' => [
+                    'zc-gii' => '@vendor/zc/gii/model/default',
+                ],
+                'template' => 'zc-gii',
+                'messageCategory' => 'backend'
+            ],
         ]
     ];
 }

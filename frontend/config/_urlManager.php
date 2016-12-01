@@ -14,6 +14,11 @@ return [
 
         // Api
         ['class' => 'yii\rest\UrlRule', 'controller' => 'api/v1/article', 'only' => ['index', 'view', 'options']],
-        ['class' => 'yii\rest\UrlRule', 'controller' => 'api/v1/user', 'only' => ['index', 'view', 'options']]
+        ['class' => 'yii\rest\UrlRule', 'controller' => 'api/v1/user', 'only' => ['index', 'view', 'options']],
+
+        //wechat
+        ['pattern'=>'wechat/<id:\d+>', 'route'=>'wechat'],//公众后台对接请求URL：/wechat/{wechatId}
+        ['pattern'=>'wechat/<id:\d+>/<scope:(snsapi_base|snsapi_userinfo)>/<action:\w+>', 'route'=>'wechat/auth/<action>'],//网页授权路由
+
     ]
 ];

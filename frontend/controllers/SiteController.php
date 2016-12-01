@@ -57,4 +57,7 @@ class SiteController extends Controller
             'model' => $model
         ]);
     }
+    public function actionTest(){
+        echo \zc\wechat\AutoloadExample::widget();
+    }
 }

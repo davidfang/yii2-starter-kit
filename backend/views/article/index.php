@@ -35,6 +35,21 @@ $this->params['breadcrumbs'][] = $this->title;
             'slug',
             'title',
             [
+                'attribute' => 'thumbnail_path',
+                'format' => 'html',
+                'value' => function ($model) {
+                    return Html::img(
+                        Yii::$app->glide->createSignedUrl([
+                            'glide/index',
+                            'path' => $model->thumbnail_path,
+                            'w' => 100
+                        ], true),
+                        ['class' => 'article-thumb img-rounded pull-left']
+                    );
+                },
+                'filter' => false
+            ],
+            [
                 'attribute' => 'category_id',
                 'value' => function ($model) {
                     return $model->category ? $model->category->title : null;

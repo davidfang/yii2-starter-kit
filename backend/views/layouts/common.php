@@ -196,7 +196,35 @@ $bundle = BackendAsset::register($this);
                                     'badgeBgClass'=>'label-danger',
                                 ],
                             ]
-                        ]
+                        ],
+                        [
+                            'label'=>'微信',
+                            'url' => '#',
+                            'icon'=>'<i class="fa fa-edit"></i>',
+                            'options'=>['class'=>'treeview'],
+                            'items'=>[
+                                ['label'=>'微信设置', 'url'=>['/wechat/wechat/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
+                                ['label'=>'菜单设置', 'url'=>['/wechat/menu/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
+                                ['label'=>'关键字', 'url'=>['/wechat/response-keyword/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
+                                ['label'=>'回复', 'url'=>['/wechat/response-reply/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
+                                ['label'=>'关键字回复', 'url'=>['/wechat/response-key-value/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
+                                ['label'=>'用户', 'url'=>['/wechat/user/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
+                                ['label'=>'场景', 'url'=>['/wechat/scene/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
+                                ['label'=>'JsSDK', 'url'=>['/wechat/jssdk/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
+                                ['label'=>'地理位置事件', 'url'=>['/wechat/event-location/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
+                                ['label'=>'菜单事件', 'url'=>['/wechat/event-menu/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
+                                ['label'=>'二维码事件', 'url'=>['/wechat/event-scan/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
+                                ['label'=>'关注事件', 'url'=>['/wechat/event-subscribe/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
+
+                                ['label'=>'请求文字', 'url'=>['/wechat/request-text/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
+                                ['label'=>'请求图片', 'url'=>['/wechat/request-image/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
+                                ['label'=>'请求语音', 'url'=>['/wechat/request-voice/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
+                                ['label'=>'请求礼品', 'url'=>['/wechat/request-video/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
+                                ['label'=>'地理位置', 'url'=>['/wechat/request-location/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
+                                ['label'=>'请求关键字', 'url'=>['/wechat/request-keyword/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
+                                ['label'=>'请求链接', 'url'=>['/wechat/request-link/index'], 'icon'=>'<i class="fa fa-angle-double-right"></i>'],
+                            ]
+                        ],
                     ]
                 ]) ?>
             </section>

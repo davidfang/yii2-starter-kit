@@ -1,5 +1,6 @@
 <?php
 $config = [
+    'timeZone'=>'Asia/Shanghai',
     'components' => [
         'assetManager' => [
             'class' => 'yii\web\AssetManager',

@@ -12,9 +12,10 @@ $config = [
         'api' => [
             'class' => 'frontend\modules\api\Module',
             'modules' => [
-                'v1' => 'frontend\modules\api\v1\Module'
+                'v1' => 'frontend\modules\api\v1\Module',
             ]
-        ]
+        ],
+        'wechat' => 'zc\wechat\front\Module'
     ],
     'components' => [
         'authClientCollection' => [

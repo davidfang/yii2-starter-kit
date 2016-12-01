@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>这是个测试页面</h1>
+<main>
+    <div>
+        <ol>
+            <li><span>openId:</span><span id="openId"></span></li>
+        </ol>
+    </div>
+    <script type="application/javascript">
+        var openId = localStorage.getItem('openId')?localStorage.getItem('openId'):'没有openId';
+        document.getElementById("openId").innerHTML = openId;
+    </script>
+</main>
+
+
+</body>
+</html>
