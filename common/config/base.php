@@ -64,6 +64,16 @@ $config = [
             'enableSchemaCache' => YII_ENV_PROD,
         ],
 
+        'db_sk'=>[
+            'class'=>'yii\db\Connection',
+            'dsn' => env('DB_DSN'),
+            'username' => env('DB_USERNAME'),
+            'password' => env('DB_PASSWORD'),
+            'tablePrefix' => env('DB_TABLE_PREFIX_SK'),
+            'charset' => 'utf8',
+            'enableSchemaCache' => YII_ENV_PROD,
+        ],
+
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
@@ -156,6 +166,16 @@ $config = [
             'es' => 'Español',
             'zh-CN' => '简体中文',
         ],
+        'qiniu' => [
+            'accessKey' => env('QINIU_ACCESS_KEY'),
+            'secretKey' => env('QINIU_SECRET_KEY'),
+            'bucket' => env('QINIU_BUCKET'),
+            'host' => env('QINIU_HOST'),
+            'callbackUrl'=> env('QINIU_CALLBACK_URL')
+        ],
+        'activity'=>[//约会配置信息
+            'hot'=>50,//play_count(参与人数)大于50为hot
+        ]
     ],
 ];
 
