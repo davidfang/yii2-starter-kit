@@ -15,13 +15,7 @@ use frontend\modules\api\v1\resources\BasicUser;
 class OnlineController extends ActiveController
 {
     public $modelClass = 'frontend\modules\api\v1\resources\BasicUser';
-    /**
-     * @var array
-     */
-    public $serializer = [
-        'class' => 'yii\rest\Serializer',
-        'collectionEnvelope' => 'items'
-    ];
+
 
     public function actionIndex(){
 

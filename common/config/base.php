@@ -171,7 +171,8 @@ $config = [
             'secretKey' => env('QINIU_SECRET_KEY'),
             'bucket' => env('QINIU_BUCKET'),
             'host' => env('QINIU_HOST'),
-            'callbackUrl'=> env('QINIU_CALLBACK_URL')
+            'callbackUrl'=> env('QINIU_CALLBACK_URL'),
+            'cashExpire'=>env('QINIU_CASH_EXPIRE')
         ],
         'activity'=>[//约会配置信息
             'hot'=>50,//play_count(参与人数)大于50为hot

@@ -52,7 +52,8 @@
     "zc/gii": "2.0.x-dev",
     "kartik-v/yii2-widget-datepicker": "v1.4.2",
     "zc/zc-wechat": "dev-master",
-    "qiniu/php-sdk": "^7.1"
+    "qiniu/php-sdk": "^7.1",
+    "yiisoft/yii2-redis": "^2.0"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "^2.0.0",

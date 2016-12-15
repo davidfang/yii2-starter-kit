@@ -10,7 +10,12 @@ $cache = [
 
 if (YII_ENV_DEV) {
     $cache = [
-        'class' => 'yii\caching\DummyCache'
+        'class' => 'yii\redis\Cache',
+        'redis' => [
+            'hostname' => 'localhost',
+            'port' => 6379,
+            'database' => 0,
+        ],
     ];
 }
 

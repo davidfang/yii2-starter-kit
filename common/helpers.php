@@ -175,14 +175,21 @@ function createUrl($url)
  */
 function qiniuDownloadUrl($k = 'FvatF_M83LV3ND3EgJHZF_Ifmnxv',$format=50)
 {
-    $accessKey = Yii::$app->params['qiniu']['accessKey'];
-    $secretKey = Yii::$app->params['qiniu']['secretKey'];
-    //$bucket = Yii::$app->params['qiniu']['bucket'];
-    $auth = new Auth($accessKey, $secretKey);;
-    //$callbackUrl = Yii::$app->params['qiniu']['host'] . $k .'?imageView2/0/w/80/h/80';
-    $callbackUrl = Yii::$app->params['qiniu']['host'] . $k .'-'.$format;
-    $downurl = $auth->privateDownloadUrl($callbackUrl);
+    $key = "qiniuDownloadUrl_{$format}_{$k}";
+    $downurl = Yii::$app->cache->get($key);
+    if(!$downurl) {
+        $accessKey = Yii::$app->params['qiniu']['accessKey'];
+        $secretKey = Yii::$app->params['qiniu']['secretKey'];
+        $cashExpire = Yii::$app->params['qiniu']['cashExpire'];
+        //$bucket = Yii::$app->params['qiniu']['bucket'];
+        $auth = new Auth($accessKey, $secretKey);;
+        //$callbackUrl = Yii::$app->params['qiniu']['host'] . $k .'?imageView2/0/w/80/h/80';
+        $callbackUrl = Yii::$app->params['qiniu']['host'] . $k . '-' . $format;
+        $downurl = $auth->privateDownloadUrl($callbackUrl);
+        $b = Yii::$app->cache->add($key,$downurl,$cashExpire);
+    }
     return $downurl;
+
 }
 
 /**
