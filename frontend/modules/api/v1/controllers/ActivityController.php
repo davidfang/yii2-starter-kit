@@ -14,13 +14,7 @@ use frontend\models\Activity;
 
 class ActivityController extends ActiveController
 {
-    public $modelClass = 'frontend\models\Activity';
-    /**
-     * @var array
-     */
-    public $serializer = [
-        'class' => 'yii\rest\Serializer',
-        'collectionEnvelope' => 'items'
-    ];
+    public $modelClass = 'frontend\modules\api\v1\resources\Activity';
+
 
 }

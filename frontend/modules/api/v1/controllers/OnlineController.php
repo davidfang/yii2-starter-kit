@@ -17,32 +17,4 @@ class OnlineController extends ActiveController
     public $modelClass = 'frontend\modules\api\v1\resources\BasicUser';
 
 
-    public function actionIndex(){
-
-    }
-    /**
-     * @return ActiveDataProvider
-     */
-    public function prepareDataProvider()
-    {
-        return new ActiveDataProvider(array(
-            'query' => SnsUser::find()
-        ));
-    }
-
-    /**
-     * @param $id
-     * @return array|null|\yii\db\ActiveRecord
-     * @throws HttpException
-     */
-    public function findModel($id)
-    {
-        $model = SnsUser::find()
-            ->andWhere(['id' => (int) $id])
-            ->one();
-        if (!$model) {
-            throw new HttpException(404);
-        }
-        return $model;
-    }
 }

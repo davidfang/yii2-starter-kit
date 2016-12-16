@@ -185,7 +185,7 @@ function qiniuDownloadUrl($k = 'FvatF_M83LV3ND3EgJHZF_Ifmnxv',$format=50)
         $auth = new Auth($accessKey, $secretKey);;
         //$callbackUrl = Yii::$app->params['qiniu']['host'] . $k .'?imageView2/0/w/80/h/80';
         $callbackUrl = Yii::$app->params['qiniu']['host'] . $k . '-' . $format;
-        $downurl = $auth->privateDownloadUrl($callbackUrl);
+        $downurl = $auth->privateDownloadUrl($callbackUrl,$cashExpire);
         $b = Yii::$app->cache->add($key,$downurl,$cashExpire);
     }
     return $downurl;
