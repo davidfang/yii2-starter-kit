@@ -21,5 +21,9 @@ return [
             'migrationTable' => '{{%system_rbac_migration}}',
             'templateFile' => '@common/rbac/views/migration.php'
         ],
+        'fixture' => [
+            'class' => 'yii\faker\FixtureController',
+        ],
+
     ],
 ];

@@ -1,8 +1,5 @@
 <?php
-/**
- * Require core files
- */
-require_once(__DIR__ . '/../helpers.php');
+
 
 /**
  * Setting path aliases

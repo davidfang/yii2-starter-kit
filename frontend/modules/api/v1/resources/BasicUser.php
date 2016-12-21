@@ -28,8 +28,50 @@ class BasicUser extends \common\models\BasicUser
     }
 
 
-    /*public function extraFields()
+    public function extraFields()
     {
-        return ['userProfile'];
-    }*/
+        return ['openImgs','privateImgs','activity','inPackage','outPackage'];
+    }
+
+    /**
+     * 公开照片
+     * @return $this
+     */
+    public function getOpenImgs(){
+        //return $this->hasMany(QiniuImg::className(),['user_id'=>'id'])->where(['type'=>'basic_user','check'=>2])->orderBy(['created_at' => SORT_ASC])->all();
+        return $this->hasMany(QiniuImg::className(),['user_id'=>'id'])->orderBy(['created_at' => SORT_ASC]);
+    }
+
+    /**
+     * 私密照片
+     * @return $this
+     */
+    public function getPrivateImgs(){
+        //return $this->hasMany(QiniuImg::className(),['user_id'=>'id'])->where(['type'=>'basic_user','check'=>2])->orderBy(['created_at' => SORT_ASC])->all();
+        return $this->hasMany(QiniuImg::className(),['user_id'=>'id'])->orderBy(['created_at' => SORT_ASC]);
+    }
+
+    /**
+     * 拥有的活动
+     * @return $this
+     */
+    public function getActivity(){
+        return $this->hasMany(Activity::className(),['user_id'=>'id'])->orderBy(['created_at' => SORT_ASC]);
+    }
+
+    /**
+     * 发送的礼物
+     * @return $this
+     */
+    public function getOutPackage(){
+        return $this->hasMany(Package::className(),['from_user_id'=>'id'])->select(['gift_id','count(id) AS outCount'])->groupBy('gift_id')->asArray(true);
+    }
+
+    /**
+     * 接受的礼物
+     * @return $this
+     */
+    public function getInPackage(){
+        return $this->hasMany(Package::className(),['to_user_id'=>'id'])->select(['gift_id','count(id) AS inCount'])->groupBy('gift_id')->asArray(true);
+    }
 }
