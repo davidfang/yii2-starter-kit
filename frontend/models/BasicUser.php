@@ -37,7 +37,16 @@ class BasicUser extends User
 
     const IN_TYPE_USER = '1';
     const IN_TYPE_ADMIN = '0';
-
+    /**
+     * Returns the database connection used by this AR class.
+     * By default, the "db" application component is used as the database connection.
+     * You may override this method if you want to use a different database connection.
+     * @return Connection the database connection used by this AR class.
+     */
+    public static function getDb()
+    {
+        return Yii::$app->get('db_sk');
+    }
     /**
      * @inheritdoc
      */

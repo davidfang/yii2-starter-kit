@@ -17,8 +17,15 @@ $config = [
         ],
 
         'cache' => [
-            'class' => 'yii\caching\FileCache',
-            'cachePath' => '@common/runtime/cache'
+            //'class' => 'yii\caching\FileCache',
+            //'cachePath' => '@common/runtime/cache',
+            'class' => 'yii\redis\Cache',
+            'redis' => [
+                'hostname' => env('REDIS_HOSTNAME'),
+                'port' => env('REDIS_PORT'),
+                'database' => env('REDIS_DATABASE'),
+                'password' => env('REDIS_PASSWORD')
+            ],
         ],
 
         'commandBus' => [
@@ -195,9 +202,7 @@ if (YII_ENV_DEV) {
         'class'=>'yii\gii\Module'
     ];
 
-    $config['components']['cache'] = [
-        'class' => 'yii\caching\DummyCache'
-    ];
+
     $config['components']['mailer']['transport'] = [
         'class' => 'Swift_SmtpTransport',
         'host' => env('SMTP_HOST'),

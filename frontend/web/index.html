@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<h1>这是个测试页面</h1>
+<h1>这是个测试页面 index.html</h1>
 <main>
     <div>
         <ol>
@@ -13,8 +13,13 @@
         </ol>
     </div>
     <script type="application/javascript">
-        var openId = localStorage.getItem('openId')?localStorage.getItem('openId'):'没有openId';
-        document.getElementById("openId").innerHTML = openId;
+        if(localStorage.getItem('openId')){
+            var openId = localStorage.getItem('openId');
+            document.getElementById("openId").innerHTML = openId;
+        }else{
+            location.href = '/wechat/1/snsapi_userinfo/test1'
+        }
+
     </script>
 </main>
 
