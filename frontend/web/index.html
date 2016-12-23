@@ -10,14 +10,17 @@
     <div>
         <ol>
             <li><span>openId:</span><span id="openId"></span></li>
+            <li><span>accessToken:</span><span id="accessToken"></span></li>
         </ol>
     </div>
     <script type="application/javascript">
-        if(localStorage.getItem('openId')){
+        if(localStorage.getItem('openId') || localStorage.getItem('accessToken')){
             var openId = localStorage.getItem('openId');
+            var accessToken = localStorage.getItem('access_token');
             document.getElementById("openId").innerHTML = openId;
+            document.getElementById("accessToken").innerHTML = accessToken;
         }else{
-            location.href = '/wechat/1/snsapi_userinfo/test1'
+            location.href = '/site/wechat?id=1&scope=snsapi_userinfo'
         }
 
     </script>

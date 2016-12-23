@@ -3,11 +3,12 @@
 namespace frontend\models;
 
 use Yii;
-use common\models\User;
+
 /**
  * This is the model class for table "{{%basic_user}}".
  *
  * @property integer $id
+ * @property integer $user_id
  * @property string $nickname
  * @property string $auth_key
  * @property string $password_hash
@@ -32,8 +33,11 @@ use common\models\User;
  * @property integer $created_at
  * @property integer $updated_at
  */
-class BasicUser extends User
+class BasicUser extends \yii\db\ActiveRecord
 {
+    const STATUS_NOT_ACTIVE = 1;
+    const STATUS_ACTIVE = 2;
+    const STATUS_DELETED = 3;
 
     const IN_TYPE_USER = '1';
     const IN_TYPE_ADMIN = '0';
@@ -65,12 +69,11 @@ class BasicUser extends User
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
             ['in_type', 'default', 'value' => self::IN_TYPE_USER],
             ['in_type', 'in', 'range' => [self::IN_TYPE_USER, self::IN_TYPE_ADMIN]],
-            [['nickname', 'auth_key', 'password_hash'], 'required'],
+            [['nickname'], 'required'],
             ['email','email'],
-            [['sex', 'age', 'height', 'weight', 'last_time', 'created_at', 'updated_at'], 'integer'],
+            [['user_id','sex', 'age', 'height', 'weight', 'last_time', 'created_at', 'updated_at'], 'integer'],
             [['in_type'], 'string'],
-            [['nickname', 'password_hash', 'password_reset_token', 'email', 'headimgurl'], 'string', 'max' => 255],
-            [['auth_key'], 'string', 'max' => 32],
+            [['nickname', 'email', 'headimgurl'], 'string', 'max' => 255],
             [['profession', 'emotion'], 'string', 'max' => 40],
             [['idcard_number'], 'string', 'max' => 18],
             [['city', 'country', 'province'], 'string', 'max' => 20],
@@ -95,11 +98,9 @@ class BasicUser extends User
     {
         return [
             'id' => 'ID',
+            'user_id' => 'userID',
             'nickname' => '昵称',
-            'auth_key' => 'Auth Key',
-            'password_hash' => 'Password Hash',
-            'password_reset_token' => 'Password Reset Token',
-            'email' => 'Email',
+           'email' => 'Email',
             'sex' => '用户的性别，值为1时是男性，值为2时是女性，值为0时是未知',
             'age' => '年龄',
             'height' => '身高',

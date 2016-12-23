@@ -1,9 +1,12 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\User;
 use frontend\models\BasicUser;
+use frontend\modules\user\models\SignupForm;
 use Yii;
 use frontend\models\ContactForm;
+use yii\base\ErrorException;
 use yii\web\Controller;
 use zc\wechat\models\Wechat;
 
@@ -72,50 +75,88 @@ class SiteController extends Controller
             $app = Wechat::getOauthApplication($id,$scope,"/wechat/{$id}/{$scope}/callback?callback=".urlencode($callback));
             $oauth = $app->oauth;
             $oauth->redirect()->send();
+            return;
         }
         // 已经登录过
         $getParams = $user['original'];
         $openid = $user['original']['openid'];
 
         $basic_user = BasicUser::findOne(['fromusername'=>$openid]);
+        //var_dump($basic_user);exit;
         if(empty($basic_user)){//没有注册，进行注册操作
             echo '没有注册，进行注册操作<br>';
             $basic_user = new BasicUser();
+            //$userModel = new User();
+            $signupForm = new SignupForm();
+
+
+            $signupForm->username = $getParams['openid'];
+            $signupForm->email = $getParams['openid'].'@zc.com';
+            $signupForm->password = $getParams['openid'];
+
+
+            $signupUser = $signupForm->signup();
+
             $basic_user->fromusername = $getParams['openid'];
+
             if($scope == 'snsapi_userinfo') {
-                $basic_user->username = $user['name'];
+                $basic_user->username = $getParams['openid'];
                 $basic_user->nickname = $getParams['nickname'];
                 $basic_user->sex = $getParams['sex'];
                 $basic_user->city = $getParams['city'];
                 $basic_user->country = $getParams['country'];
                 $basic_user->province = $getParams['province'];
+                $basic_user->headimgurl = $getParams['headimgurl'];
             }
 
-            $basic_user->password_hash=\Yii::$app->security->generateRandomString();
-            $basic_user->auth_key = \Yii::$app->security->generateRandomString();
-            $basic_user->last_ip = \Yii::$app->request->getUserIP();
-            $basic_user->last_time =time();
+            if($signupUser){
+                $basic_user->user_id = $signupUser->id;
+                $basic_user->last_ip = \Yii::$app->request->getUserIP();
+                $basic_user->created_at =time();
+                $basic_user->updated_at =time();
+                $basic_user->last_time =time();
 
-            $save_status = $basic_user->save();
-            $login_status = \Yii::$app->getUser()->login($basic_user);
-            /*echo '<pre>';
-            var_dump(['save_status'=>$save_status,'login_status'=>$login_status,'basic_user'=>$basic_user]);
-            echo '</pre>';*/
+                $save_status = $basic_user->save();
+            }
+            //echo '<pre>';
+            //var_dump(['$signupUser'=>$signupUser,'$save_status'=>$save_status,'$basic_user'=>$basic_user]);
+            //echo '</pre>';
             //$session['openid'] = $openid;
         }else{
             echo '已经注册，进行登录<br>';
-            \Yii::$app->user->login($basic_user, 3600 * 5 );
+            echo '<pre>';
+            //var_dump(['$basic_user'=>$basic_user]);
+            $signupUser = User::findOne($basic_user->user_id);
+            if($scope == 'snsapi_userinfo') {
+                $basic_user->username = $getParams['openid'];
+                $basic_user->nickname = $getParams['nickname'];
+                $basic_user->sex = $getParams['sex'];
+                $basic_user->city = $getParams['city'];
+                $basic_user->country = $getParams['country'];
+                $basic_user->province = $getParams['province'];
+                $basic_user->headimgurl = $getParams['headimgurl'];
+            }
+
             $basic_user->last_ip = \Yii::$app->request->getUserIP();
             $basic_user->last_time =time();
+            $basic_user->updated_at =time();
             $basic_user->save();
             //$session['openid'] = $openid;
         }
 
-
-        echo 'actionTest var_dump<br>';
-        echo '<pre>$user:';
-        var_dump($user);
-        echo '--------------------<br>$basic_user:';
-        var_dump($basic_user);
+        var_dump($signupUser->access_token);
+        echo  <<<doc
+<script type="application/javascript">
+        var accessToken = localStorage.setItem('access_token','{$signupUser->access_token}');
+        var openId = localStorage.setItem('openId','$wechatInfo');
+        //document.getElementById("openId").innerHTML = openId;
+        location.href = "/index.html";//JS跳转到静态页面的地址
+    </script>
+doc;
+        //echo 'actionTest var_dump<br>';
+        //echo '<pre>$user:';
+        //var_dump($user);
+        //echo '--------------------<br>$basic_user:';
+        //var_dump($basic_user);
     }
 }
