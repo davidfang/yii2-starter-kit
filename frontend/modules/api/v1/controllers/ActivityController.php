@@ -9,8 +9,6 @@
 namespace frontend\modules\api\v1\controllers;
 
 use yii\rest\ActiveController;
-use yii\data\ActiveDataProvider;
-use frontend\models\Activity;
 
 class ActivityController extends ActiveController
 {

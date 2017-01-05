@@ -22,7 +22,7 @@ class Activity extends \common\models\Activity
             return qiniuDownloadUrl($this->img_id .'.jpg',500 );
         };
         // 删除一些包含敏感信息的字段
-        unset($fields['auth_key'], $fields['password_hash'], $fields['password_reset_token']);
+        //unset();
 
         return $fields;
     }

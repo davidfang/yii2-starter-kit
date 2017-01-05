@@ -1,21 +1,23 @@
 <?php
+namespace frontend\modules\api\v1\controllers;
+
 /**
  * Created by PhpStorm.
  * User: Administrator
- * Date: 2016/12/12 0012
- * Time: 下午 12:33
+ * Date: 2016/12/23 0023
+ * Time: 上午 11:22
  */
 
-namespace frontend\modules\api\v1\controllers;
+
 use yii\filters\auth\CompositeAuth;
 use yii\filters\auth\HttpBasicAuth;
 use yii\filters\auth\HttpBearerAuth;
 use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;
 
-class OnlineController extends ActiveController
+class ActivityRecordController extends  ActiveController
 {
-    public $modelClass = 'frontend\modules\api\v1\resources\BasicUser';
+    public $modelClass = 'frontend\modules\api\v1\resources\ActivityRecord';
     /**
      * @return array
      */
@@ -41,6 +43,12 @@ class OnlineController extends ActiveController
         ];
 
         return $behaviors;
+    }
+
+
+
+    public function actionProcess ($id,$allow){
+        return ['msg'=>'hello','status'=>true,'id'=>$id,'allow'=>$allow];
     }
 
 }

@@ -19,6 +19,8 @@ return [
         ['class' => 'yii\rest\UrlRule', 'controller' => 'api/v1/online', 'only' => ['index', 'view','create', 'options']],
         ['class' => 'yii\rest\UrlRule', 'controller' => 'api/v1/img', 'only' => ['index', 'view']],
         ['class' => 'yii\rest\UrlRule', 'controller' => 'api/v1/gift', 'only' => ['index', 'view']],
+        ['class' => 'yii\rest\UrlRule', 'controller' => 'api/v1/message', 'only' => ['index', 'view','create']],
+        ['class' => 'yii\rest\UrlRule', 'controller' => 'api/v1/activity-record', 'only' => ['index', 'view','create']],
 
         //wechat
         ['pattern'=>'wechat/<id:\d+>', 'route'=>'wechat'],//公众后台对接请求URL：/wechat/{wechatId}
