@@ -67,6 +67,7 @@ class ResetPasswordForm extends Model
     {
         $user = $this->token->user;
         $user->password = $this->password;
+        $user->access_token = Yii::$app->getSecurity()->generateRandomString(40);
         if($user->save()) {
             $this->token->delete();
         };

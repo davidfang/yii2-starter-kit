@@ -44,8 +44,8 @@ class ActivityRecord extends \common\models\ActivityRecord
      * @return \yii\db\ActiveQuery
      */
     public function getMessage(){
-        return $this->hasMany(Message::className(),['activity_id'=>'activity_id',])
-            ->where(['in','from_user_id',[$this->user_id,$this->own_user_id]])
-            ->where(['in','to_user_id',[$this->user_id,$this->own_user_id]]);
+        return $this->hasMany(Message::className(),['activity_id'=>'activity_id',]);
+            //->where(['in','from_user_id',[$this->user_id,$this->own_user_id]])
+            //->where(['in','to_user_id',[$this->user_id,$this->own_user_id]]);
     }
 }
