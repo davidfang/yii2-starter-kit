@@ -30,7 +30,7 @@ class Activity extends \common\models\Activity
 
     public function extraFields()
     {
-        return ['user'];
+        return ['user','activityRecords'];
     }
     /**
      * 用户信息
@@ -40,4 +40,5 @@ class Activity extends \common\models\Activity
     {
         return $this->hasOne(BasicUser::className(), ['id' => 'user_id']);
     }
+
 }

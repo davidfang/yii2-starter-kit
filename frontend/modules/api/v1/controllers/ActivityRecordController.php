@@ -14,6 +14,7 @@ use yii\filters\auth\HttpBasicAuth;
 use yii\filters\auth\HttpBearerAuth;
 use yii\filters\auth\QueryParamAuth;
 use yii\rest\ActiveController;
+use yii\data\ActiveDataProvider;
 
 class ActivityRecordController extends  ActiveController
 {
@@ -49,6 +50,40 @@ class ActivityRecordController extends  ActiveController
 
     public function actionProcess ($id,$allow){
         return ['msg'=>'hello','status'=>true,'id'=>$id,'allow'=>$allow];
+    }
+
+    /**
+     * 我参与的约会
+     * @return ActiveDataProvider
+     */
+    public function actionMyJoin()
+    {
+        $identity = \Yii::$app->user->identity;
+        /* @var $modelClass \yii\db\BaseActiveRecord */
+        $modelClass = $this->modelClass;
+
+        $query = $modelClass::find()->where(['user_id'=>$identity->id]);
+
+        return new ActiveDataProvider([
+            'query' => $query,
+        ]);
+    }
+
+    /**
+     * 我的约会的参与者列表
+     * @return ActiveDataProvider
+     */
+    public function actionPlayer($activityId)
+    {
+        $identity = \Yii::$app->user->identity;
+        /* @var $modelClass \yii\db\BaseActiveRecord */
+        $modelClass = $this->modelClass;
+
+        $query = $modelClass::find()->where(['own_user_id'=>$identity->id,'activity_id'=>$activityId]);
+
+        return new ActiveDataProvider([
+            'query' => $query,
+        ]);
     }
 
 }
