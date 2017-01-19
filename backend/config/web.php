@@ -41,9 +41,25 @@ $config = [
         'wechat' => [
             'class' => 'zc\wechat\admin\Module',
         ],
+        'admin' => [
+            'class' => 'mdm\admin\Module',
+        ],
+    ],
+    "aliases" => [
+        "@mdm/admin" => "@vendor/zc/yii2-admin",
     ],
     'as globalAccess'=>[
-        'class'=>'\common\behaviors\GlobalAccessBehavior',
+        //ACF肯定是要加的，因为粗心导致该配置漏掉了，很是抱歉
+        'class' => 'mdm\admin\components\AccessControl',
+        'allowActions' => [
+            //这里是允许访问的action
+            //controller/action
+            //'*',
+            'sign-in/*',
+            'debug/default',
+            'site/error'
+        ]
+        /*'class'=>'\common\behaviors\GlobalAccessBehavior',
         'rules'=>[
             [
                 'controllers'=>['sign-in'],
@@ -81,7 +97,7 @@ $config = [
                 'allow' => true,
                 'roles' => ['manager'],
             ]
-        ]
+        ]*/
     ]
 ];
 
@@ -104,6 +120,7 @@ if (YII_ENV_DEV) {
                 'templates' => [
                     'yii2-starter-kit' => Yii::getAlias('@backend/views/_gii/templates'),
                     'zc-gii' => '@vendor/zc/gii/crud/default',
+                    'yii2-starter-kit-copy-right' => '@vendor/zc/yii2-admin/_gii/templates',
                 ],
                 'template' => 'yii2-starter-kit',
                 'messageCategory' => 'backend'
